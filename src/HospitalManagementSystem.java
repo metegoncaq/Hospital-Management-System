@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-//LOGIN DE SET KULLANILACAK -BURAK
-
 public class HospitalManagementSystem implements Serializable {
     private static final String RESET = "\u001B[0m";
     private static final String RED = "\u001B[31m";
@@ -450,8 +448,20 @@ public class HospitalManagementSystem implements Serializable {
                         System.out.println("1)Vaccinate Patient\n2)Take Care Patient\n3)Exit");
                         nurseChoice = getValidInput(scanner, 1, 3);
                         switch (nurseChoice) {
-                            case 1 -> nurse.vaccinate();
-                            case 2 -> nurse.takeCare();
+                            case 1 -> {
+                                VaccineAppointment appointment = nurse.vaccinate();
+                                if (appointment!=null)
+                                    System.out.println(appointment.getPatient().getName() +" " +appointment.getPatient().getSurname()  + " vaccinated.");
+                                else
+                                    System.out.println("There is no patient to vaccinate.");
+                            }
+                            case 2 -> {
+                                Patient patient=nurse.takeCare();
+                                if (patient!=null)
+                                    System.out.println(patient.getName() +" "+ patient.getSurname() + "took care.");
+                                else
+                                    System.out.println("There is no patient to take care.");
+                            }
                             case 3 -> System.out.println("Returning To The Main Menu");
                         }
                     }
@@ -609,9 +619,6 @@ public class HospitalManagementSystem implements Serializable {
         }
         returnVal[0] = shortestPath;
         returnVal[1] = shortestPathWeights;
-        System.out.println("vertices\n" + Arrays.toString(returnVal[0]) + "\n");
-        System.out.println("path\n" + Arrays.toString(returnVal[1]) + "\n");
-        System.out.println("distance\n" + Arrays.toString(distance) + "\n");
         return returnVal;
     }
 

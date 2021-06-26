@@ -1,6 +1,8 @@
-import java.util.*;
-import SortAlgorithms.*;
-import Tree.*;
+import SortAlgorithms.QuickSort;
+import Tree.RedBlackTree;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Administrator extends AbstractPerson implements Staff {
 
@@ -140,10 +142,10 @@ public class Administrator extends AbstractPerson implements Staff {
                 h.getDoctors().put(staff.getID(),(Doctor)staff);
 
             else if (staff instanceof Nurse)
-                h.getNurses().remove(staff.getID());
+                h.getNurses().put(staff.getID(), (Nurse) staff);
 
             else
-                h.getReceptionists().remove(staff.getID());
+                h.getReceptionists().put(staff.getID(), (Receptionist) staff);
         }
         else
             System.out.println("Staff could not hire!");
